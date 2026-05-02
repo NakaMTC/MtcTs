@@ -108,6 +108,7 @@
             buttonOK.TabIndex = 2;
             buttonOK.Text = "OK";
             buttonOK.UseVisualStyleBackColor = true;
+            buttonOK.Click += buttonOK_Click;
             // 
             // buttonCancel
             // 
@@ -527,7 +528,7 @@
             selD.FormattingEnabled = true;
             selD.Location = new Point(574, 30);
             selD.Margin = new Padding(4, 2, 4, 2);
-            selD.Name = "SelD";
+            selD.Name = "selD";
             selD.Size = new Size(137, 23);
             selD.TabIndex = 7;
             // 
@@ -536,7 +537,7 @@
             selC.FormattingEnabled = true;
             selC.Location = new Point(394, 30);
             selC.Margin = new Padding(4, 2, 4, 2);
-            selC.Name = "SelC";
+            selC.Name = "selC";
             selC.Size = new Size(137, 23);
             selC.TabIndex = 5;
             // 
@@ -545,7 +546,7 @@
             selB.FormattingEnabled = true;
             selB.Location = new Point(222, 30);
             selB.Margin = new Padding(4, 2, 4, 2);
-            selB.Name = "SelB";
+            selB.Name = "selB";
             selB.Size = new Size(137, 23);
             selB.TabIndex = 3;
             // 
@@ -554,7 +555,7 @@
             selA.FormattingEnabled = true;
             selA.Location = new Point(46, 30);
             selA.Margin = new Padding(4, 2, 4, 2);
-            selA.Name = "SelA";
+            selA.Name = "selA";
             selA.Size = new Size(137, 23);
             selA.TabIndex = 1;
             // 
@@ -611,7 +612,7 @@
             startATS.FormattingEnabled = true;
             startATS.Location = new Point(478, 130);
             startATS.Margin = new Padding(4, 2, 4, 2);
-            startATS.Name = "StartATS";
+            startATS.Name = "startATS";
             startATS.Size = new Size(137, 23);
             startATS.TabIndex = 19;
             // 
@@ -704,7 +705,7 @@
             start下.FormattingEnabled = true;
             start下.Location = new Point(149, 130);
             start下.Margin = new Padding(4, 2, 4, 2);
-            start下.Name = "Start下";
+            start下.Name = "start下";
             start下.Size = new Size(137, 23);
             start下.TabIndex = 17;
             // 
@@ -713,7 +714,7 @@
             start右.FormattingEnabled = true;
             start右.Location = new Point(228, 103);
             start右.Margin = new Padding(4, 2, 4, 2);
-            start右.Name = "Start右";
+            start右.Name = "start右";
             start右.Size = new Size(137, 23);
             start右.TabIndex = 14;
             // 
@@ -722,7 +723,7 @@
             start左.FormattingEnabled = true;
             start左.Location = new Point(83, 103);
             start左.Margin = new Padding(4, 2, 4, 2);
-            start左.Name = "Start左";
+            start左.Name = "start左";
             start左.Size = new Size(137, 23);
             start左.TabIndex = 13;
             // 
@@ -731,7 +732,7 @@
             start上.FormattingEnabled = true;
             start上.Location = new Point(149, 76);
             start上.Margin = new Padding(4, 2, 4, 2);
-            start上.Name = "Start上";
+            start上.Name = "start上";
             start上.Size = new Size(137, 23);
             start上.TabIndex = 11;
             // 
@@ -740,7 +741,7 @@
             startD.FormattingEnabled = true;
             startD.Location = new Point(574, 30);
             startD.Margin = new Padding(4, 2, 4, 2);
-            startD.Name = "StartD";
+            startD.Name = "startD";
             startD.Size = new Size(137, 23);
             startD.TabIndex = 7;
             // 
@@ -749,7 +750,7 @@
             startC.FormattingEnabled = true;
             startC.Location = new Point(394, 30);
             startC.Margin = new Padding(4, 2, 4, 2);
-            startC.Name = "StartC";
+            startC.Name = "startC";
             startC.Size = new Size(137, 23);
             startC.TabIndex = 5;
             // 
@@ -758,7 +759,7 @@
             startB.FormattingEnabled = true;
             startB.Location = new Point(222, 30);
             startB.Margin = new Padding(4, 2, 4, 2);
-            startB.Name = "StartB";
+            startB.Name = "startB";
             startB.Size = new Size(137, 23);
             startB.TabIndex = 3;
             // 
@@ -767,7 +768,7 @@
             startA.FormattingEnabled = true;
             startA.Location = new Point(46, 30);
             startA.Margin = new Padding(4, 2, 4, 2);
-            startA.Name = "StartA";
+            startA.Name = "startA";
             startA.Size = new Size(137, 23);
             startA.TabIndex = 1;
             // 
@@ -798,6 +799,7 @@
             buttonInit.TabIndex = 22;
             buttonInit.Text = "初期化";
             buttonInit.UseVisualStyleBackColor = true;
+            buttonInit.Click += buttonInit_Click;
             // 
             // FormSettings
             // 

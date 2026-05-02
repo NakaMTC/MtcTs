@@ -8,7 +8,6 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.AxHost;
 
 namespace MtcTs
 {
@@ -26,13 +25,13 @@ namespace MtcTs
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            foreach (Panel panel in new[] { panel1, panel2, panel3 } )
+            foreach (Panel panel in new[] { panel1, panel2, panel3 })
             {
 
                 foreach (Control control in panel.Controls)
                 {
                     ComboBox? comboBox = control as ComboBox;
-                    if(comboBox != null) InitComboBox(comboBox);                    
+                    if (comboBox != null) InitComboBox(comboBox);
                 }
             }
 
@@ -53,14 +52,14 @@ namespace MtcTs
             }
         }
 
-        static List<ValTxt> m_List= [];
+        static List<ValTxt> m_List = [];
 
         private void InitComboBox(ComboBox comboBox)
         {
 
-            if(m_List.Count <= 0)
+            if (m_List.Count <= 0)
             {
-                m_List.Add(new (0 , "--"));
+                m_List.Add(new(0, "--"));
                 foreach (eKeyTypes keyType in Enum.GetValues(typeof(eKeyTypes)))
                 {
                     m_List.Add(new((int)keyType, keyType.ToString()));
@@ -96,7 +95,7 @@ namespace MtcTs
             sel左.SelectedValue = Common.settings.selLeft;
             sel右.SelectedValue = Common.settings.selRight;
 
-            startA.SelectedValue = Common.settings.startA;            
+            startA.SelectedValue = Common.settings.startA;
             startB.SelectedValue = Common.settings.startB;
             startC.SelectedValue = Common.settings.startC;
             startD.SelectedValue = Common.settings.startD;
@@ -108,6 +107,53 @@ namespace MtcTs
 
             SelStart.SelectedValue = Common.settings.SelStart;
         }
+
+        private void buttonInit_Click(object sender, EventArgs e)
+        {
+            Common.settings.Init();
+            LoadComboBox();
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            Common.settings.a = A.SelectedValue as int? ?? 0;
+            Common.settings.aa = A強.SelectedValue as int? ?? 0;
+            Common.settings.b = B.SelectedValue as int? ?? 0;
+            Common.settings.c = C.SelectedValue as int? ?? 0;
+            Common.settings.d = D.SelectedValue as int? ?? 0;
+            Common.settings.ats = ATS.SelectedValue as int? ?? 0;
+            Common.settings.up = 上.SelectedValue as int? ?? 0;
+            Common.settings.down = 下.SelectedValue as int? ?? 0;
+            Common.settings.left = 左.SelectedValue as int? ?? 0;
+            Common.settings.right = 右.SelectedValue as int? ?? 0;
+
+            Common.settings.selA = selA.SelectedValue as int? ?? 0;
+            Common.settings.selB = selB.SelectedValue as int? ?? 0;
+            Common.settings.selC = selC.SelectedValue as int? ?? 0;
+            Common.settings.selD = selD.SelectedValue as int? ?? 0;
+            Common.settings.selATS = selATS.SelectedValue as int? ?? 0;
+            Common.settings.selUP = sel上.SelectedValue as int? ?? 0;
+            Common.settings.selDown = sel下.SelectedValue as int? ?? 0;
+            Common.settings.selLeft = sel左.SelectedValue as int? ?? 0;
+            Common.settings.selRight = sel右.SelectedValue as int? ?? 0;
+
+            Common.settings.startA = startA.SelectedValue as int? ?? 0;
+            Common.settings.startB = startB.SelectedValue as int? ?? 0;
+            Common.settings.startC = startC.SelectedValue as int? ?? 0;
+            Common.settings.startD = startD.SelectedValue as int? ?? 0;
+            Common.settings.startATS = startATS.SelectedValue as int? ?? 0;
+            Common.settings.startUp = start上.SelectedValue as int? ?? 0;
+            Common.settings.startDown = start下.SelectedValue as int? ?? 0;
+            Common.settings.startLeft = start左.SelectedValue as int? ?? 0;
+            Common.settings.startRight = start右.SelectedValue as int? ?? 0;
+
+            Common.settings.SelStart = SelStart.SelectedValue as int? ?? 0;
+
+            Settings.Save(Common.settings);
+
+            this.Close();
+        }
+
 
     }
 }

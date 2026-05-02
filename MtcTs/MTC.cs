@@ -72,6 +72,7 @@ namespace MtcTs
 
             }
             if (_val >= min && _val <= max) { val = _val; fr = _fr; }
+            else return;
 
             bool _a = CheckBit(bytes, bitA), _aa = CheckBit(bytes, bitAA), _b = CheckBit(bytes, bitB), _c = CheckBit(bytes, bitC), _d = CheckBit(bytes, bitD)
                , _ats = CheckBit(bytes, bitATS)
@@ -81,7 +82,10 @@ namespace MtcTs
             // Select・Start以外は 全OFFのチェック
             bool allOff = !(_a || _aa || _b || _c || _d || _ats || _up || _down || _left || right);
 
-
+            if (_ats)
+            {
+                _ats = CheckBit(bytes, bitATS);
+            }
 
 
             // allOffの場合のみ 現在のモードの変更を許可する
@@ -118,7 +122,7 @@ namespace MtcTs
                 aa = false;
             }
 
-                Debug.WriteLine(ToText());
+            Debug.WriteLine(ToText());
         }
 
         internal static string ToText()

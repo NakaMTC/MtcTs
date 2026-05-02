@@ -26,6 +26,9 @@ namespace MtcTs
             settings = Settings.Load();
         }
 
+        /// <summary> Windows ・ ALTキー </summary>
+        internal const int VK_LWindows = 0x5B, VK_Alt = 0xA4;
+        
     }
 
     /// <summary> Select・Startボタンの状態</summary>
@@ -33,12 +36,11 @@ namespace MtcTs
 
     internal enum eKeyTypes
     {
-        Space_ATS確認 = 0x08,
-        Enter_電笛 = 0x0d,
+        Space_ATS確認 = 0x20,
+        Enter_電笛 = 0x0D,
         Back_空笛 = 0x08,
         Shift_視点 = 0x10,
-        Esc_ポーズ = 0x1B,
-        Sp_ATS確認 = 0x20,
+        Esc_ポーズ = 0x1B,        
         左 = 0x25,
         上 = 0x26,
         右 = 0x27,
@@ -57,6 +59,8 @@ namespace MtcTs
         X_警報持続 = 'X',
         Y_復帰常用 = 'Y',
 
+        Win = 0x5B,
+        Alt = 0xA4,
 
         非常 = -1,
         WinG_ゲームバー = -2,
