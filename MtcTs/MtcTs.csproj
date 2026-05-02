@@ -6,12 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>icon\p5b8.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="icon\p5b8.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="LibUsbDotNet">

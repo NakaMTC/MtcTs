@@ -31,7 +31,7 @@
             chkEnable = new CheckBox();
             button1 = new Button();
             label1 = new Label();
-            comboBox1 = new ComboBox();
+            buttonSettings = new Button();
             SuspendLayout();
             // 
             // chkEnable
@@ -65,25 +65,28 @@
             label1.TabIndex = 2;
             label1.Text = "label1";
             // 
-            // comboBox1
+            // buttonSettings
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(160, 95);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(194, 23);
-            comboBox1.TabIndex = 3;
-            comboBox1.SelectedValueChanged += comboBox1_SelectedValueChanged;
+            buttonSettings.BackgroundImageLayout = ImageLayout.Zoom;
+            buttonSettings.Location = new Point(380, 39);
+            buttonSettings.Name = "buttonSettings";
+            buttonSettings.Size = new Size(75, 65);
+            buttonSettings.TabIndex = 4;
+            buttonSettings.Text = "設定";
+            buttonSettings.UseVisualStyleBackColor = true;
+            buttonSettings.Click += buttonSettings_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(506, 182);
-            Controls.Add(comboBox1);
+            Controls.Add(buttonSettings);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(chkEnable);
             Font = new Font("BIZ UDPゴシック", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
             Name = "Form1";
             Text = "Form1";
@@ -97,6 +100,6 @@
         private CheckBox chkEnable;
         private Button button1;
         private Label label1;
-        private ComboBox comboBox1;
+        private Button buttonSettings;
     }
 }

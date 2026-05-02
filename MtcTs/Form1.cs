@@ -12,12 +12,24 @@ namespace MtcTs
         private bool mConnectOK = false;
 
 
+
+
         /// <summary>　MTCを有効にするかどうか？ のチェック </summary>
         private void chkEnable_CheckedChanged(object sender, EventArgs e)
         {
             mEnable = chkEnable.Checked;
             chkEnable.Text = (mEnable ? "有効" : "無効");
         }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            chkEnable.Checked = false;
+            using (var form = new FormSettings() { Icon=this.Icon })
+            {
+                form.ShowDialog(this);
+            }
+        }
+
 
         public Form1()
         {
@@ -26,7 +38,7 @@ namespace MtcTs
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
 
             this.Text = "MTC";
             this.Icon = Properties.Resources.p0b0;
@@ -100,7 +112,7 @@ namespace MtcTs
                         MTC.Read(MtcType, tmp);
 
 
-                        if (MTC.isErrVal == false) Invoke(() =>
+                        Invoke(() =>
                         {
                             label1.Text = MTC.ToText();
                             button1.Enabled = true;
@@ -135,16 +147,6 @@ namespace MtcTs
                     }
                 }
             });
-        }
-
-        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-
-
-            //eKeyTypes? eVal = KeySetting.GetComboValue(comboBox1);
-            //int intNum = (eVal != null ? (int)eVal : 0);
-            //char c = ((intNum >= 'A' && intNum <= 'Z') ? (char)(intNum) : '-');
         }
     }
 }

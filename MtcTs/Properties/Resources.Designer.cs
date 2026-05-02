@@ -61,24 +61,6 @@ namespace MtcTs.Properties {
         }
         
         /// <summary>
-        ///   steam://rungameid/2111630 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string GameUrl {
-            get {
-                return ResourceManager.GetString("GameUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///    に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string JsonSetting {
-            get {
-                return ResourceManager.GetString("JsonSetting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
         internal static System.Drawing.Icon p0b0 {
@@ -91,9 +73,19 @@ namespace MtcTs.Properties {
         /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Icon p13b8 {
+        internal static System.Drawing.Icon p13b7 {
             get {
-                object obj = ResourceManager.GetObject("p13b8", resourceCulture);
+                object obj = ResourceManager.GetObject("p13b7", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Icon p4b6 {
+            get {
+                object obj = ResourceManager.GetObject("p4b6", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -111,9 +103,9 @@ namespace MtcTs.Properties {
         /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Icon p4b8 {
+        internal static System.Drawing.Icon p5b5 {
             get {
-                object obj = ResourceManager.GetObject("p4b8", resourceCulture);
+                object obj = ResourceManager.GetObject("p5b5", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -121,19 +113,9 @@ namespace MtcTs.Properties {
         /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Icon p5b6 {
+        internal static System.Drawing.Icon p5b7 {
             get {
-                object obj = ResourceManager.GetObject("p5b6", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Icon p5b8 {
-            get {
-                object obj = ResourceManager.GetObject("p5b8", resourceCulture);
+                object obj = ResourceManager.GetObject("p5b7", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

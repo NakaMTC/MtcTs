@@ -11,18 +11,17 @@ namespace MtcTs
 {
     internal static class MTC
     {
-
         /// <summary> 前進後退(1前/0中/-1後) 、 最大段数、最小段数（非常を含む）、現在の段数 </summary>
-        internal static int FR, Max, Min, Val;
+        internal static int fr, max, min, val;
 
-        /// <summary> エラー段数かどうか？ </summary>
-        internal static bool isErrVal => (Val < Min || Val > Max);
+        /// <summary> 現在の Select・Startボタンの同時押し状態 </summary>
+        internal static eSelectStartType selStartMode = eSelectStartType.Non;
 
-        /// <summary> ボタンのON-OFF (Start・Select以外) </summary>
-        private static bool[] BtnOn = new bool[(int)eMtcButton.CNT];
+        /// <summary> 現在の Select・Start 以外のボタンの状態 </summary>
+        internal static bool a, aa, b, c, d, ats, up, down, left, right;
 
-        /// <summary> Start・SelectのON-OF </summary>
-        private static bool Start, Select;
+        /// <summary> Select・Start の同時押しの状態 </summary>
+        internal static bool selStartBoth;
 
         /// <summary> ボタンのビットフィールド </summary>
         private const uint bitA = 0x0400, bitAA = 0x0c00, bitB = 0x1000, bitC = 0x2000, bitD = 0x0200;
@@ -38,71 +37,104 @@ namespace MtcTs
         /// <param name="mtcType">MTCの種類</param>
         internal static void Read(int mtcType, uint bytes)
         {
-            Max = Common.MtcList[mtcType].Max;
-            Min = Common.MtcList[mtcType].Min;
+            max = Common.MtcList[mtcType].Max;
+            min = Common.MtcList[mtcType].Min;
 
-            if (Max == 13)  // P13～Bxの場合
+
+
+            int _val, _fr;
+            if (max == 13)  // P13～Bxの場合
             {
-                int fr = (int)((bytes & 0xE0) >> 4);
-                if (fr == 0) FR = 0;
-                else if (fr == 4) FR = -1;
-                if (fr == 8) FR = 1;
+                _val = (int)(bytes & 0x1F) + min - 1;
 
-                Val = (int)(bytes & 0x1F) + Min - 1;
+                _fr = (int)((bytes & 0xE0) >> 4);
+                if (_fr == 0) _fr = 0;
+                else if (_fr == 4) _fr = -1;
+                if (_fr == 8) _fr = 1;
             }
-            else if (Min == -6)  // P5～B5 (非常を含めてB6) の場合
+            else if (min == -6)  // P5～B5 (非常を含めてB6) の場合
             {
-                int fr = (int)(bytes & 0x30);
-                if (fr == 0) FR = 0;
-                else if (fr == 16) FR = -1;
-                if (fr == 32) FR = 1;
-                
-                Val = (int)(bytes & 0x0F) + Min - 1;
+                _val = (int)(bytes & 0x0F) + min - 1;
+
+                _fr = (int)(bytes & 0x30);
+                if (_fr == 0) _fr = 0;
+                else if (_fr == 16) _fr = -1;
+                if (_fr == 32) _fr = 1;
             }
             else
             {
-                int fr = (int)((bytes & 0xF0) >> 4);
-                if (fr == 0) FR = 0;
-                else if (fr == 4) FR = -1;
-                if (fr == 8) FR = 1;
+                _val = (int)(bytes & 0x0F) + min - 1;
 
-                Val = (int)(bytes & 0x0F) + Min - 1;
+                _fr = (int)((bytes & 0xF0) >> 4);
+                if (_fr == 0) _fr = 0;
+                else if (_fr == 4) _fr = -1;
+                if (_fr == 8) _fr = 1;
+
+            }
+            if (_val >= min && _val <= max) { val = _val; fr = _fr; }
+
+            bool _a = CheckBit(bytes, bitA), _aa = CheckBit(bytes, bitAA), _b = CheckBit(bytes, bitB), _c = CheckBit(bytes, bitC), _d = CheckBit(bytes, bitD)
+               , _ats = CheckBit(bytes, bitATS)
+               , _up = CheckBit(bytes, bitUP), _down = CheckBit(bytes, bitDOWN), _left = CheckBit(bytes, bitLEFT), _right = CheckBit(bytes, bitRIGHT)
+               , _select = CheckBit(bytes, bitSelect), _start = CheckBit(bytes, bitStart);
+
+            // Select・Start以外は 全OFFのチェック
+            bool allOff = !(_a || _aa || _b || _c || _d || _ats || _up || _down || _left || right);
+
+
+
+
+            // allOffの場合のみ 現在のモードの変更を許可する
+            if (allOff)
+            {
+                if (_select && _start) selStartMode = eSelectStartType.Both;
+                else if (_select) selStartMode = eSelectStartType.Sel;
+                else if (_start) selStartMode = eSelectStartType.Start;
+                else selStartMode = eSelectStartType.Non;
             }
 
-            BtnOn[(int)eMtcButton.A] = CheckBit(bytes, bitA);
-            BtnOn[(int)eMtcButton.A強] = CheckBit(bytes, bitAA);
-            BtnOn[(int)eMtcButton.B] = CheckBit(bytes, bitB);
-            BtnOn[(int)eMtcButton.C] = CheckBit(bytes, bitC);
-            BtnOn[(int)eMtcButton.D] = CheckBit(bytes, bitD);
+            // 同時押しモードが一致している場合のみ、ボタンのONを許可する
+            if ((_select == true && _start == false && selStartMode == eSelectStartType.Sel) ||
+                (_select == false && _start == true && selStartMode == eSelectStartType.Start) ||
+                (_select == false && _start == false && selStartMode == eSelectStartType.Non))
+            {
+                a = _a; aa = _aa; b = _b; c = _c; d = _d;
+                ats = _ats;
+                up = _up; down = _down; left = _left; right = _right;                
+            }
+            else
+            {
+                if (!_a) a = false; if (!_aa) aa = false; if (!_b) b = false; if (!_c) c = false; if (!_d) d = false;
+                if (!_ats) ats = false;
+                if (!_up) up = false; if (!_down) down = false; if (!_left) left = false; if (!_right) right = false;             
+            }
 
-            BtnOn[(int)eMtcButton.ATS] = CheckBit(bytes, bitATS);
-            Start = CheckBit(bytes, bitStart);
-            Select = CheckBit(bytes, bitSelect);
+            selStartBoth = (selStartMode == eSelectStartType.Both && _select && _start);
 
-            BtnOn[(int)eMtcButton.上] = CheckBit(bytes, bitUP);
-            BtnOn[(int)eMtcButton.下] = CheckBit(bytes, bitDOWN);
-            BtnOn[(int)eMtcButton.左] = CheckBit(bytes, bitLEFT);
-            BtnOn[(int)eMtcButton.右] = CheckBit(bytes, bitRIGHT);
 
-            Debug.WriteLine(ToText());
+            if (selStartMode == eSelectStartType.Sel || selStartMode == eSelectStartType.Start)
+            {
+                a = (a || aa);
+                aa = false;
+            }
+
+                Debug.WriteLine(ToText());
         }
 
         internal static string ToText()
         {
-            string text = $"({Min+1}～{Max}) ";
+            string text = $"({min + 1}～{max}) ";
 
-            if (isErrVal == false && FR >= -1 && FR <= 1) text += new[] { "後 ", "中 ", "前 " }[FR + 1];
-            if (isErrVal == false) text += $"{Val} ";
+            if (fr >= -1 && fr <= 1) text += new[] { "後 ", "中 ", "前 " }[fr + 1] + $"{val} ";
 
-            for (int i = 0; i < (int)eMtcButton.CNT; i++)
-            {
-                if (BtnOn[i]) text += $"{(eMtcButton)i} ";
-            }
+            if (selStartMode == eSelectStartType.Sel) text += "[select] ";
+            if (selStartMode == eSelectStartType.Start) text += "|start> ";
+            if (selStartBoth) text += "|select|start> ";
 
-            if (Select) text += $"[Select] ";
-            if (Start) text += $"|Start> ";
+            if (a) text += "A "; if (aa) text += "A強 "; if (b) text += "B "; if (c) text += "C "; if (d) text += "D ";
+            if (ats) text += "ATS "; if (up) text += "↑ "; if (down) text += "↓ "; if (left) text += "← "; if (right) text += "→ ";
 
-            return text;
+            return text.Trim();
         }
 
         private static bool CheckBit(uint bits, uint mask) => ((bits & mask) == mask);
