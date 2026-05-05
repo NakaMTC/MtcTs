@@ -11,11 +11,11 @@ namespace MtcTs
 {
     internal static class MTC
     {
-        /// <summary> 前進後退(1前/0中/-1後) 、 最大段数、最小段数（非常を含む）、現在の段数 </summary>
-        internal static int fr, max, min, val;
+        /// <summary> 前進後退(1前/0中/-1後) 、 現在の段数（＋ or 0 or マイナス）</summary>
+        internal static int fr, val;
 
         /// <summary> 現在の Select・Startボタンの同時押し状態 </summary>
-        internal static eSelectStartType selStartMode = eSelectStartType.Non;
+        internal static eSelectStartType m_SelStartMode = eSelectStartType.Non;
 
         /// <summary> 現在の Select・Start 以外のボタンの状態 </summary>
         internal static bool a, aa, b, c, d, ats, up, down, left, right;
@@ -33,74 +33,64 @@ namespace MtcTs
         private const uint bitUP = 0x00040000, bitDOWN = 0x00080000, bitLEFT = 0x00100000, bitRIGHT = 0x00200000;
 
 
-        /// <summary> USBから送られてきたバイト列を読み込む</summary>
-        /// <param name="mtcType">MTCの種類</param>
-        internal static void Read(int mtcType, uint bytes)
+        /// <summary> USBから送られてきたバイト列を読み込む</summary>        
+        internal static bool Read()
         {
-            max = Common.MtcList[mtcType].Max;
-            min = Common.MtcList[mtcType].Min;
-
-
-
             int _val, _fr;
-            if (max == 13)  // P13～Bxの場合
+            if (Usb.m_Max == 13)  // P13～Bxの場合
             {
-                _val = (int)(bytes & 0x1F) + min - 1;
+                _val = (int)(Usb.m_Uint32 & 0x1F) + Usb.m_Min - 1;
 
-                _fr = (int)((bytes & 0xE0) >> 4);
+                _fr = (int)((Usb.m_Uint32 & 0xE0) >> 4);
                 if (_fr == 0) _fr = 0;
                 else if (_fr == 4) _fr = -1;
                 if (_fr == 8) _fr = 1;
             }
-            else if (min == -6)  // P5～B5 (非常を含めてB6) の場合
+            else if (Usb.m_Min == -6)  // P5～B5 (非常を含めてB6) の場合
             {
-                _val = (int)(bytes & 0x0F) + min - 1;
+                _val = (int)(Usb.m_Uint32 & 0x0F) + Usb.m_Min - 1;
 
-                _fr = (int)(bytes & 0x30);
+                _fr = (int)(Usb.m_Uint32 & 0x30);
                 if (_fr == 0) _fr = 0;
                 else if (_fr == 16) _fr = -1;
                 if (_fr == 32) _fr = 1;
             }
             else
             {
-                _val = (int)(bytes & 0x0F) + min - 1;
+                _val = (int)(Usb.m_Uint32 & 0x0F) + Usb.m_Min - 1;
 
-                _fr = (int)((bytes & 0xF0) >> 4);
+                _fr = (int)((Usb.m_Uint32 & 0xF0) >> 4);
                 if (_fr == 0) _fr = 0;
                 else if (_fr == 4) _fr = -1;
                 if (_fr == 8) _fr = 1;
-
             }
-            if (_val >= min && _val <= max) { val = _val; fr = _fr; }
-            else return;
+            if (_val >= Usb.m_Min && _val <= Usb.m_Max) { val = _val; fr = _fr; }
+            else return false;
 
-            bool _a = CheckBit(bytes, bitA), _aa = CheckBit(bytes, bitAA), _b = CheckBit(bytes, bitB), _c = CheckBit(bytes, bitC), _d = CheckBit(bytes, bitD)
-               , _ats = CheckBit(bytes, bitATS)
-               , _up = CheckBit(bytes, bitUP), _down = CheckBit(bytes, bitDOWN), _left = CheckBit(bytes, bitLEFT), _right = CheckBit(bytes, bitRIGHT)
-               , _select = CheckBit(bytes, bitSelect), _start = CheckBit(bytes, bitStart);
+
+            bool _a = CheckBit(Usb.m_Uint32, bitA), _aa = CheckBit(Usb.m_Uint32, bitAA)
+               , _b = CheckBit(Usb.m_Uint32, bitB), _c = CheckBit(Usb.m_Uint32, bitC), _d = CheckBit(Usb.m_Uint32, bitD)
+               , _ats = CheckBit(Usb.m_Uint32, bitATS)
+               , _up = CheckBit(Usb.m_Uint32, bitUP), _down = CheckBit(Usb.m_Uint32, bitDOWN)
+               , _left = CheckBit(Usb.m_Uint32, bitLEFT), _right = CheckBit(Usb.m_Uint32, bitRIGHT)
+               , _select = CheckBit(Usb.m_Uint32, bitSelect), _start = CheckBit(Usb.m_Uint32, bitStart);
 
             // Select・Start以外は 全OFFのチェック
             bool allOff = !(_a || _aa || _b || _c || _d || _ats || _up || _down || _left || right);
 
-            if (_ats)
-            {
-                _ats = CheckBit(bytes, bitATS);
-            }
-
-
             // allOffの場合のみ 現在のモードの変更を許可する
             if (allOff)
             {
-                if (_select && _start) selStartMode = eSelectStartType.Both;
-                else if (_select) selStartMode = eSelectStartType.Sel;
-                else if (_start) selStartMode = eSelectStartType.Start;
-                else selStartMode = eSelectStartType.Non;
+                if (_select && _start) m_SelStartMode = eSelectStartType.Both;
+                else if (_select) m_SelStartMode = eSelectStartType.Sel;
+                else if (_start) m_SelStartMode = eSelectStartType.Start;
+                else m_SelStartMode = eSelectStartType.Non;
             }
 
             // 同時押しモードが一致している場合のみ、ボタンのONを許可する
-            if ((_select == true && _start == false && selStartMode == eSelectStartType.Sel) ||
-                (_select == false && _start == true && selStartMode == eSelectStartType.Start) ||
-                (_select == false && _start == false && selStartMode == eSelectStartType.Non))
+            if ((_select == true && _start == false && m_SelStartMode == eSelectStartType.Sel) ||
+                (_select == false && _start == true && m_SelStartMode == eSelectStartType.Start) ||
+                (_select == false && _start == false && m_SelStartMode == eSelectStartType.Non))
             {
                 a = _a; aa = _aa; b = _b; c = _c; d = _d;
                 ats = _ats;
@@ -113,26 +103,26 @@ namespace MtcTs
                 if (!_up) up = false; if (!_down) down = false; if (!_left) left = false; if (!_right) right = false;             
             }
 
-            selStartBoth = (selStartMode == eSelectStartType.Both && _select && _start);
+            selStartBoth = (m_SelStartMode == eSelectStartType.Both && _select && _start);
 
 
-            if (selStartMode == eSelectStartType.Sel || selStartMode == eSelectStartType.Start)
+            if (m_SelStartMode == eSelectStartType.Sel || m_SelStartMode == eSelectStartType.Start)
             {
                 a = (a || aa);
                 aa = false;
             }
 
-            Debug.WriteLine(ToText());
+            return true;
         }
 
         internal static string ToText()
         {
-            string text = $"({min + 1}～{max}) ";
+            string text = "";
 
             if (fr >= -1 && fr <= 1) text += new[] { "後 ", "中 ", "前 " }[fr + 1] + $"{val} ";
 
-            if (selStartMode == eSelectStartType.Sel) text += "[select] ";
-            if (selStartMode == eSelectStartType.Start) text += "|start> ";
+            if (m_SelStartMode == eSelectStartType.Sel) text += "[select] ";
+            if (m_SelStartMode == eSelectStartType.Start) text += "|start> ";
             if (selStartBoth) text += "|select|start> ";
 
             if (a) text += "A "; if (aa) text += "A強 "; if (b) text += "B "; if (c) text += "C "; if (d) text += "D ";

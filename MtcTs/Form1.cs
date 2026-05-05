@@ -1,34 +1,83 @@
-using LibUsbDotNet;
-using LibUsbDotNet.Main;
-using System;
 using System.Diagnostics;
 
 namespace MtcTs
 {
     public partial class Form1 : Form
     {
-        /// <summary>　MTCを有効にするかどうか？ </summary>
-        private bool mEnable = false;
 
-        private bool mConnectOK = false;
+        /// <summary> 終了ボタン </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
+        /// <summary> 終了の有効・無効の切替 </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(chkEnable.Checked)
+            {
+                // 有効にチェック → チェックを外す。 終了は無効
+                chkEnable.Checked = false;
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = !FormYesNo.Show(this, "終了します。よろしいですか？" , "修了確認");
+            }
+        }
+
+
+
+
+        /// <summary>　MTCを有効にするかどうか？ </summary>
+        private bool m_Enable = false;
+
+        /// <summary>　接続OKかどうか？ </summary>
+        private bool m_ConnectOK = false;
+
+        private string m_LavelText = "";
+
 
 
         /// <summary>　MTCを有効にするかどうか？ のチェック </summary>
         private void chkEnable_CheckedChanged(object sender, EventArgs e)
         {
-            mEnable = chkEnable.Checked;
-            chkEnable.Text = (mEnable ? "有効" : "無効");
-            if (mEnable) textBox1.Select();
+            if (m_Enable == true && chkEnable.Checked == false)
+            {
+                if (FormYesNo.Show(this, "有効 → 無効 に切り替えます。よろしいですか？", "切替確認") == false)
+                {
+                    chkEnable.Checked = true;
+                    return;
+                }
+            }
+
+            m_Enable = chkEnable.Checked;
+            chkEnable.Text = (m_Enable ? "有効" : "無効");
+            if (m_Enable) textBox1.Select();
+
+            OnKeyUpAll();
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            chkEnable.Checked = false;
-            using (var form = new FormSettings() { Icon = this.Icon })
+            if (chkEnable.Checked)
             {
-                form.ShowDialog(this);
+                chkEnable.Checked = false;
+            }
+            else
+            {
+                using (var form = new FormSettings() { Icon = this.Icon })
+                {
+                    form.ShowDialog(this);
+                }
             }
         }
+
 
 
         public Form1()
@@ -38,111 +87,26 @@ namespace MtcTs
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Text = "MTC";
-            this.Icon = Properties.Resources.p0b0;
-            button1.BackgroundImage = Properties.Resources.p0b0.ToBitmap();
-            button1.Enabled = false;
-            button1.Text = "";
+            Text = "MTC";
             label1.Text = "";
 
             Task.Run(() =>
             {
-                int MtcType = -1;
-                uint prevUint32 = 0;                            // 前回読み込み時バイト列 (32ビット)
-                UsbEndpointReader? usbEndpointReader = null;    // USB の Reader
-                UsbDevice? device = null;                       // USB の デバイス
-                Image? imgErr = null;
-
                 while (true)
                 {
-                    try
+                    bool res = Usb.Read();
+                    if (res) res = MTC.Read();
+
+                    string str = Usb.ToText() + " " + MTC.ToText();
+
+                    if (m_Enable == false && str != m_LavelText)
                     {
-                        if (MtcType < 0)
-                        {
-                            // MtcList [0～4] のループ → MtcType を特定する
-                            foreach (UsbRegistry reg in UsbDevice.AllDevices)
-                            {
-                                for (int i = 0; i < Common.MtcList.Length; i++)
-                                {
-                                    if (reg.Vid == Common.MtcList[i].Vid && reg.Pid == Common.MtcList[i].Pid && reg.Rev == Common.MtcList[i].Rev)
-                                    {   // Vid　Pid　Rev　が見つかった
-
-                                        // 接続を行う 
-                                        if (reg.Open(out device) && device != null)
-                                        {   // 接続成功
-                                            usbEndpointReader = device.OpenEndpointReader(ReadEndpointID.Ep01);
-
-                                            Invoke(() =>
-                                            {
-                                                Icon = Common.MtcList[i].icon;
-                                                button1.BackgroundImage = Common.MtcList[i].img;
-                                            });
-
-                                            MtcType = i;
-                                        }
-                                        else
-                                        {
-                                            throw new Exception($"接続失敗\r\n{reg.Name}\r\n{UsbDevice.LastErrorString}");
-                                        }
-
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (MtcType < 0) throw new Exception("未接続");
-                        if (usbEndpointReader == null) throw new Exception("未接続");
-
-
-                        // 8バイトバッファへの読み込み
-                        byte[] buff = new byte[8];  // 8バイトバッファ
-                        int readLen = 0;
-                        ErrorCode code = usbEndpointReader.Read(buff, 2000, out readLen);
-                        //if (code != ErrorCode.IoTimedOut) continue;
-                        if (readLen <= 0 || code != ErrorCode.None) throw new Exception($"接続エラー{code}");
-
-                        uint tmp = (readLen > 0) ? ((uint)buff[1] << 00 | (uint)buff[2] << 08 | (uint)buff[3] << 16 | (uint)buff[4] << 24) : 0;
-
-
-                        if (tmp == 0 || tmp == prevUint32) continue;
-
-                        MTC.Read(MtcType, tmp);
-                        OnKeyDownUp();
-
-                        Invoke(() =>
-                        {
-                            label1.Text = MTC.ToText();
-                            button1.Enabled = true;
-                        });
-
-
-                        mConnectOK = true;
-                        prevUint32 = tmp;
+                        Invoke(() => label1.Text = str);
+                        m_LavelText = str;
                     }
-                    catch (Exception ex)
-                    {
-                        try { if (imgErr == null) imgErr = Properties.Resources.p0b0.ToBitmap(); } catch (Exception) { }
-                        try { device?.Close(); } catch { }
-                        try { usbEndpointReader?.Dispose(); } catch { }
-                        device = null;
-                        usbEndpointReader = null;
-                        prevUint32 = 0x00;
 
-                        if (MtcType >= 0)
-                        {
-                            Invoke(() =>
-                            {
-                                Icon = Properties.Resources.p0b0;
-                                button1.BackgroundImage = imgErr;
-                                button1.Enabled = false;
-                                label1.Text = ex.Message;
-                            });
-                        }
 
-                        MtcType = -1;
-                        mConnectOK = false;
-                    }
+                    if (Usb.m_Uint32 == 0x00) Thread.Sleep(5000);
                 }
             });
         }
@@ -154,50 +118,49 @@ namespace MtcTs
         private void OnKeyDownUp()
         {
             List<int> nowKeys = [];
-            nowKeys.Clear();
 
-            if (MTC.selStartMode == eSelectStartType.Non)
+            if (MTC.m_SelStartMode == eSelectStartType.Non)
             {
-                if (MTC.a) nowKeys.Add(Common.settings.a);
-                if (MTC.aa) nowKeys.Add(Common.settings.aa);
-                if (MTC.b) nowKeys.Add(Common.settings.b);
-                if (MTC.c) nowKeys.Add(Common.settings.c);
-                if (MTC.d) nowKeys.Add(Common.settings.d);
-                if (MTC.ats) nowKeys.Add(Common.settings.ats);
-                if (MTC.up) nowKeys.Add(Common.settings.up);
-                if (MTC.down) nowKeys.Add(Common.settings.down);
-                if (MTC.left) nowKeys.Add(Common.settings.left);
-                if (MTC.right) nowKeys.Add(Common.settings.right);
+                if (MTC.a) nowKeys.Add(Settings.instance.a);
+                if (MTC.aa) nowKeys.Add(Settings.instance.aa);
+                if (MTC.b) nowKeys.Add(Settings.instance.b);
+                if (MTC.c) nowKeys.Add(Settings.instance.c);
+                if (MTC.d) nowKeys.Add(Settings.instance.d);
+                if (MTC.ats) nowKeys.Add(Settings.instance.ats);
+                if (MTC.up) nowKeys.Add(Settings.instance.up);
+                if (MTC.down) nowKeys.Add(Settings.instance.down);
+                if (MTC.left) nowKeys.Add(Settings.instance.left);
+                if (MTC.right) nowKeys.Add(Settings.instance.right);
             }
-            else if (MTC.selStartMode == eSelectStartType.Sel)
+            else if (MTC.m_SelStartMode == eSelectStartType.Sel)
             {
-                if (MTC.a) nowKeys.Add(Common.settings.selA);
-                if (MTC.b) nowKeys.Add(Common.settings.selB);
-                if (MTC.c) nowKeys.Add(Common.settings.selC);
-                if (MTC.d) nowKeys.Add(Common.settings.selD);
-                if (MTC.ats) nowKeys.Add(Common.settings.selATS);
-                if (MTC.up) nowKeys.Add(Common.settings.selUP);
-                if (MTC.down) nowKeys.Add(Common.settings.selDown);
-                if (MTC.left) nowKeys.Add(Common.settings.selLeft);
-                if (MTC.right) nowKeys.Add(Common.settings.selRight);
+                if (MTC.a) nowKeys.Add(Settings.instance.selA);
+                if (MTC.b) nowKeys.Add(Settings.instance.selB);
+                if (MTC.c) nowKeys.Add(Settings.instance.selC);
+                if (MTC.d) nowKeys.Add(Settings.instance.selD);
+                if (MTC.ats) nowKeys.Add(Settings.instance.selATS);
+                if (MTC.up) nowKeys.Add(Settings.instance.selUP);
+                if (MTC.down) nowKeys.Add(Settings.instance.selDown);
+                if (MTC.left) nowKeys.Add(Settings.instance.selLeft);
+                if (MTC.right) nowKeys.Add(Settings.instance.selRight);
             }
-            else if (MTC.selStartMode == eSelectStartType.Start)
+            else if (MTC.m_SelStartMode == eSelectStartType.Start)
             {
-                if (MTC.a) nowKeys.Add(Common.settings.startA);
-                if (MTC.b) nowKeys.Add(Common.settings.startB);
-                if (MTC.c) nowKeys.Add(Common.settings.startC);
-                if (MTC.d) nowKeys.Add(Common.settings.startD);
-                if (MTC.ats) nowKeys.Add(Common.settings.startATS);
-                if (MTC.up) nowKeys.Add(Common.settings.startUp);
-                if (MTC.down) nowKeys.Add(Common.settings.startDown);
-                if (MTC.left) nowKeys.Add(Common.settings.startLeft);
-                if (MTC.right) nowKeys.Add(Common.settings.startRight);
+                if (MTC.a) nowKeys.Add(Settings.instance.startA);
+                if (MTC.b) nowKeys.Add(Settings.instance.startB);
+                if (MTC.c) nowKeys.Add(Settings.instance.startC);
+                if (MTC.d) nowKeys.Add(Settings.instance.startD);
+                if (MTC.ats) nowKeys.Add(Settings.instance.startATS);
+                if (MTC.up) nowKeys.Add(Settings.instance.startUp);
+                if (MTC.down) nowKeys.Add(Settings.instance.startDown);
+                if (MTC.left) nowKeys.Add(Settings.instance.startLeft);
+                if (MTC.right) nowKeys.Add(Settings.instance.startRight);
             }
 
-            if (MTC.selStartBoth) nowKeys.Add(Common.settings.SelStart);
+            if (MTC.selStartBoth) nowKeys.Add(Settings.instance.SelStart);
 
 
-            if(nowKeys.Contains((int)eKeyTypes.WinAltR_録画))
+            if (nowKeys.Contains((int)eKeyTypes.WinAltR_録画))
             {
                 nowKeys.Add((int)eKeyTypes.Win);
                 nowKeys.Add((int)eKeyTypes.Alt);
@@ -210,14 +173,14 @@ namespace MtcTs
                 nowKeys.Add('G');
             }
 
+            if (nowKeys.Contains((int)eKeyTypes.EB_Bブザー))
+            {
+                //if(Co.)
+            }
+
             nowKeys = nowKeys.Where(x => x != 0).Distinct().ToList();
 
-            
-
-
             if (nowKeys.Count == 0 && pushedKeys.Count == 0) return;
-
-
 
             IEnumerable<int> downs = nowKeys.Where(x => pushedKeys.Contains(x) == false);
             OnKeyDown(downs);
@@ -228,7 +191,11 @@ namespace MtcTs
             pushedKeys = nowKeys;
         }
 
-
+        private void OnKeyUpAll()
+        {
+            OnKeyUp(pushedKeys);
+            pushedKeys.Clear();
+        }
 
         private void OnKeyDown(IEnumerable<int> keys)
         {
@@ -236,11 +203,11 @@ namespace MtcTs
             foreach (int key in keys)
             {
 
-                Debug.WriteLine($"OnKeyDown {key} , {mEnable}");
+                Debug.WriteLine($"OnKeyDown {key} , {m_Enable}");
             }
 
 
-            ShowKeys("－", keys);
+            ShowKeys("+", keys);
         }
 
 
@@ -250,15 +217,15 @@ namespace MtcTs
             if (keys.Count() <= 0) return;
             foreach (int key in keys)
             {
-                Debug.WriteLine($"OnKeyUp {key} , {mEnable}");
+                Debug.WriteLine($"OnKeyUp {key} , {m_Enable}");
             }
-            ShowKeys("＋", keys);
+            ShowKeys("-", keys);
         }
 
 
         private void ShowKeys(string text, IEnumerable<int> keys)
         {
-            if (mEnable) return;
+            //if (m_Enable) return;
 
             string tmp = "";
             foreach (int key in keys)
@@ -275,11 +242,11 @@ namespace MtcTs
                 else tmp += $" ({key})\r\n";
             }
 
+
             Invoke(() =>
             {
                 textBox2.Text += tmp;
 
-                
                 textBox2.SelectionStart = textBox2.Text.Length;
 
                 textBox2.ScrollToCaret();
@@ -287,9 +254,21 @@ namespace MtcTs
 
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
+            if (chkEnable.Checked == false)
+            {
+                chkEnable.Checked = true;
+                return;
+            }
 
+            if (m_Enable == false || m_ConnectOK == false) return;
+
+
+            MessageBox.Show("aa");
         }
+
+
     }
 }

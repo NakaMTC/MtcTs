@@ -163,6 +163,7 @@
             // 
             // ATS
             // 
+            ATS.DropDownStyle = ComboBoxStyle.DropDownList;
             ATS.FormattingEnabled = true;
             ATS.Location = new Point(478, 130);
             ATS.Margin = new Padding(4, 2, 4, 2);
@@ -267,6 +268,7 @@
             // 
             // 下
             // 
+            下.DropDownStyle = ComboBoxStyle.DropDownList;
             下.FormattingEnabled = true;
             下.Location = new Point(149, 130);
             下.Margin = new Padding(4, 2, 4, 2);
@@ -276,6 +278,7 @@
             // 
             // 右
             // 
+            右.DropDownStyle = ComboBoxStyle.DropDownList;
             右.FormattingEnabled = true;
             右.Location = new Point(228, 103);
             右.Margin = new Padding(4, 2, 4, 2);
@@ -285,6 +288,7 @@
             // 
             // 左
             // 
+            左.DropDownStyle = ComboBoxStyle.DropDownList;
             左.FormattingEnabled = true;
             左.Location = new Point(83, 103);
             左.Margin = new Padding(4, 2, 4, 2);
@@ -294,6 +298,7 @@
             // 
             // 上
             // 
+            上.DropDownStyle = ComboBoxStyle.DropDownList;
             上.FormattingEnabled = true;
             上.Location = new Point(149, 76);
             上.Margin = new Padding(4, 2, 4, 2);
@@ -303,6 +308,7 @@
             // 
             // D
             // 
+            D.DropDownStyle = ComboBoxStyle.DropDownList;
             D.FormattingEnabled = true;
             D.Location = new Point(574, 8);
             D.Margin = new Padding(4, 2, 4, 2);
@@ -312,6 +318,7 @@
             // 
             // C
             // 
+            C.DropDownStyle = ComboBoxStyle.DropDownList;
             C.FormattingEnabled = true;
             C.Location = new Point(394, 8);
             C.Margin = new Padding(4, 2, 4, 2);
@@ -321,6 +328,7 @@
             // 
             // B
             // 
+            B.DropDownStyle = ComboBoxStyle.DropDownList;
             B.FormattingEnabled = true;
             B.Location = new Point(222, 8);
             B.Margin = new Padding(4, 2, 4, 2);
@@ -330,6 +338,7 @@
             // 
             // A強
             // 
+            A強.DropDownStyle = ComboBoxStyle.DropDownList;
             A強.FormattingEnabled = true;
             A強.Location = new Point(46, 38);
             A強.Margin = new Padding(4, 2, 4, 2);
@@ -339,6 +348,7 @@
             // 
             // A
             // 
+            A.DropDownStyle = ComboBoxStyle.DropDownList;
             A.FormattingEnabled = true;
             A.Location = new Point(46, 8);
             A.Margin = new Padding(4, 2, 4, 2);
@@ -396,6 +406,7 @@
             // 
             // selATS
             // 
+            selATS.DropDownStyle = ComboBoxStyle.DropDownList;
             selATS.FormattingEnabled = true;
             selATS.Location = new Point(478, 130);
             selATS.Margin = new Padding(4, 2, 4, 2);
@@ -489,6 +500,7 @@
             // 
             // sel下
             // 
+            sel下.DropDownStyle = ComboBoxStyle.DropDownList;
             sel下.FormattingEnabled = true;
             sel下.Location = new Point(149, 130);
             sel下.Margin = new Padding(4, 2, 4, 2);
@@ -498,6 +510,7 @@
             // 
             // sel右
             // 
+            sel右.DropDownStyle = ComboBoxStyle.DropDownList;
             sel右.FormattingEnabled = true;
             sel右.Location = new Point(228, 103);
             sel右.Margin = new Padding(4, 2, 4, 2);
@@ -507,6 +520,7 @@
             // 
             // sel左
             // 
+            sel左.DropDownStyle = ComboBoxStyle.DropDownList;
             sel左.FormattingEnabled = true;
             sel左.Location = new Point(83, 103);
             sel左.Margin = new Padding(4, 2, 4, 2);
@@ -516,6 +530,7 @@
             // 
             // sel上
             // 
+            sel上.DropDownStyle = ComboBoxStyle.DropDownList;
             sel上.FormattingEnabled = true;
             sel上.Location = new Point(149, 76);
             sel上.Margin = new Padding(4, 2, 4, 2);
@@ -525,6 +540,7 @@
             // 
             // selD
             // 
+            selD.DropDownStyle = ComboBoxStyle.DropDownList;
             selD.FormattingEnabled = true;
             selD.Location = new Point(574, 30);
             selD.Margin = new Padding(4, 2, 4, 2);
@@ -534,6 +550,7 @@
             // 
             // selC
             // 
+            selC.DropDownStyle = ComboBoxStyle.DropDownList;
             selC.FormattingEnabled = true;
             selC.Location = new Point(394, 30);
             selC.Margin = new Padding(4, 2, 4, 2);
@@ -543,6 +560,7 @@
             // 
             // selB
             // 
+            selB.DropDownStyle = ComboBoxStyle.DropDownList;
             selB.FormattingEnabled = true;
             selB.Location = new Point(222, 30);
             selB.Margin = new Padding(4, 2, 4, 2);
@@ -552,6 +570,7 @@
             // 
             // selA
             // 
+            selA.DropDownStyle = ComboBoxStyle.DropDownList;
             selA.FormattingEnabled = true;
             selA.Location = new Point(46, 30);
             selA.Margin = new Padding(4, 2, 4, 2);
@@ -609,6 +628,7 @@
             // 
             // startATS
             // 
+            startATS.DropDownStyle = ComboBoxStyle.DropDownList;
             startATS.FormattingEnabled = true;
             startATS.Location = new Point(478, 130);
             startATS.Margin = new Padding(4, 2, 4, 2);
@@ -702,6 +722,7 @@
             // 
             // start下
             // 
+            start下.DropDownStyle = ComboBoxStyle.DropDownList;
             start下.FormattingEnabled = true;
             start下.Location = new Point(149, 130);
             start下.Margin = new Padding(4, 2, 4, 2);
@@ -711,6 +732,7 @@
             // 
             // start右
             // 
+            start右.DropDownStyle = ComboBoxStyle.DropDownList;
             start右.FormattingEnabled = true;
             start右.Location = new Point(228, 103);
             start右.Margin = new Padding(4, 2, 4, 2);
@@ -720,6 +742,7 @@
             // 
             // start左
             // 
+            start左.DropDownStyle = ComboBoxStyle.DropDownList;
             start左.FormattingEnabled = true;
             start左.Location = new Point(83, 103);
             start左.Margin = new Padding(4, 2, 4, 2);
@@ -729,6 +752,7 @@
             // 
             // start上
             // 
+            start上.DropDownStyle = ComboBoxStyle.DropDownList;
             start上.FormattingEnabled = true;
             start上.Location = new Point(149, 76);
             start上.Margin = new Padding(4, 2, 4, 2);
@@ -738,6 +762,7 @@
             // 
             // startD
             // 
+            startD.DropDownStyle = ComboBoxStyle.DropDownList;
             startD.FormattingEnabled = true;
             startD.Location = new Point(574, 30);
             startD.Margin = new Padding(4, 2, 4, 2);
@@ -747,6 +772,7 @@
             // 
             // startC
             // 
+            startC.DropDownStyle = ComboBoxStyle.DropDownList;
             startC.FormattingEnabled = true;
             startC.Location = new Point(394, 30);
             startC.Margin = new Padding(4, 2, 4, 2);
@@ -756,6 +782,7 @@
             // 
             // startB
             // 
+            startB.DropDownStyle = ComboBoxStyle.DropDownList;
             startB.FormattingEnabled = true;
             startB.Location = new Point(222, 30);
             startB.Margin = new Padding(4, 2, 4, 2);
@@ -765,6 +792,7 @@
             // 
             // startA
             // 
+            startA.DropDownStyle = ComboBoxStyle.DropDownList;
             startA.FormattingEnabled = true;
             startA.Location = new Point(46, 30);
             startA.Margin = new Padding(4, 2, 4, 2);
@@ -783,6 +811,7 @@
             // 
             // SelStart
             // 
+            SelStart.DropDownStyle = ComboBoxStyle.DropDownList;
             SelStart.FormattingEnabled = true;
             SelStart.Location = new Point(149, 553);
             SelStart.Margin = new Padding(4, 2, 4, 2);
@@ -815,7 +844,6 @@
             Controls.Add(panel1);
             Controls.Add(buttonCancel);
             Controls.Add(buttonOK);
-            DoubleBuffered = true;
             Font = new Font("BIZ UDゴシック", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 2, 4, 2);

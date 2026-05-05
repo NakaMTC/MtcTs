@@ -61,62 +61,12 @@ namespace MtcTs.Properties {
         }
         
         /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Icon p0b0 {
+        internal static System.Drawing.Bitmap MtcTs001 {
             get {
-                object obj = ResourceManager.GetObject("p0b0", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Icon p13b7 {
-            get {
-                object obj = ResourceManager.GetObject("p13b7", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Icon p4b6 {
-            get {
-                object obj = ResourceManager.GetObject("p4b6", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Icon p4b7 {
-            get {
-                object obj = ResourceManager.GetObject("p4b7", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Icon p5b5 {
-            get {
-                object obj = ResourceManager.GetObject("p5b5", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Icon p5b7 {
-            get {
-                object obj = ResourceManager.GetObject("p5b7", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("MtcTs001", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
