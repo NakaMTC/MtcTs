@@ -1,6 +1,6 @@
 ﻿namespace MtcTs
 {
-    partial class FormYesNo
+    partial class FormMsg
     {
         /// <summary>
         /// Required designer variable.
@@ -67,7 +67,7 @@
             buttonNo.UseVisualStyleBackColor = true;
             buttonNo.Click += buttonNo_Click;
             // 
-            // FormYesNo
+            // FormMsg
             // 
             AutoScaleDimensions = new SizeF(11F, 25F);
             AutoScaleMode = AutoScaleMode.Font;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             chkEnable = new CheckBox();
             button1 = new Button();
             label1 = new Label();
@@ -51,7 +50,6 @@
             // 
             // button1
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Zoom;
             button1.Location = new Point(12, 15);
             button1.Margin = new Padding(2, 4, 2, 4);
@@ -120,7 +118,6 @@
             Controls.Add(chkEnable);
             Font = new Font("BIZ UDゴシック", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "Form1";
             Text = "Form1";

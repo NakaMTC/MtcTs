@@ -28,7 +28,7 @@ namespace MtcTs
             }
             else
             {
-                e.Cancel = !FormYesNo.Show(this, "終了します。よろしいですか？" , "修了確認");
+                e.Cancel = !FormMsg.Show(this, "終了します。よろしいですか？", "修了確認", true);
             }
         }
 
@@ -48,7 +48,7 @@ namespace MtcTs
         {
             if (m_Enable == true && chkEnable.Checked == false)
             {
-                if (FormYesNo.Show(this, "有効 → 無効 に切り替えます。よろしいですか？", "切替確認") == false)
+                if (FormMsg.Show(this, "有効 → 無効 に切り替えます。よろしいですか？", "切替確認", true) == false)
                 {
                     chkEnable.Checked = true;
                     return;
@@ -82,8 +82,11 @@ namespace MtcTs
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var version = Assembly.GetEntryAssembly()?.GetName().Version;
-            Text = $"MtcTs - ver.{version}";
+            Program.GetIconVer(out string ver, out Icon? icon, out Bitmap? iconBitmap);
+            Icon = icon;
+            this.button1.BackgroundImage = iconBitmap;
+            Text = $"MtcTs - ver.{ver}";
+
 
             label1.Text = "";
 

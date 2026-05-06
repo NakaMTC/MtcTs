@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Drawing;
+using System.Reflection;
 
 namespace MtcTs
 {
@@ -23,8 +24,9 @@ namespace MtcTs
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            var version = Assembly.GetEntryAssembly()?.GetName().Version;
-            Text = $"MtcTs 設定 - ver.{version}";
+            Program.GetIconVer(out string ver, out Icon? icon, out Bitmap? iconBitmap);
+            Icon = icon;
+            Text = $"MtcTs 設定 - ver.{ver}";
             
 
             foreach (ComboBox comboBox in ComboList)
