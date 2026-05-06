@@ -81,11 +81,10 @@ namespace MtcTs
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {            
-            string filePath = Assembly.GetExecutingAssembly().Location;                 // 自分自身の実行ファイルのパスを取得
-            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(filePath);     // ファイルのバージョン情報を取得
+        {
+            var version = Assembly.GetEntryAssembly()?.GetName().Version;
+            Text = $"MtcTs - ver.{version}";
 
-            Text = $"MtcTs - ver.{versionInfo.FileVersion}";
             label1.Text = "";
 
             Task.Run(() =>
@@ -108,17 +107,21 @@ namespace MtcTs
                             MtcKeyMouse.OnKeyClear();
                         }
                     }
-                    
 
-                    string str = Usb.ToText() + " " + MTC.ToText();
-
-                    if (m_Enable == false && str != m_LabelText)
+                    if (m_Enable == false)
                     {
-                        Invoke(() => label1.Text = str);
-                        m_LabelText = str;
+                        string str = Usb.ToText() + " " + MTC.ToText();
+
+                        if (str != m_LabelText)
+                        {
+                            Invoke(() => label1.Text = str);
+                            m_LabelText = str;
+                        }
                     }
 
-                    if (Usb.m_Uint32 == 0x00) Thread.Sleep(5000);
+                    if (Usb.m_Uint32 == 0x00 ) Thread.Sleep(5000);
+                    else if (m_Enable == false) Thread.Sleep(100);
+                    
                 }
             });
         }

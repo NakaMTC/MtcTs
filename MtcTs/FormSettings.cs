@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Data;
-using System.Diagnostics;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace MtcTs
 {
@@ -27,10 +23,8 @@ namespace MtcTs
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            string filePath = Assembly.GetExecutingAssembly().Location;                 // 自分自身の実行ファイルのパスを取得
-            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(filePath);     // ファイルのバージョン情報を取得
-
-            Text = $"MtcTs 設定 - ver.{versionInfo.FileVersion}";
+            var version = Assembly.GetEntryAssembly()?.GetName().Version;
+            Text = $"MtcTs 設定 - ver.{version}";
             
 
             foreach (ComboBox comboBox in ComboList)

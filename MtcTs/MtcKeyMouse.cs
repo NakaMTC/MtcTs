@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
+﻿using System.Runtime.InteropServices;
 
 namespace MtcTs
 {
@@ -104,18 +102,28 @@ namespace MtcTs
         }
 
         private static void KeyUpDown(List<int>? keys)
-         {
+        {
             IEnumerable<int>? downs, ups;    // Downしたキー、Upしたキーの一覧
 
-            if (keys != null)
+
+            if (m_Keys.Count > 0 && keys != null && keys.Count > 0)
             {
                 downs = keys.Where(_ => m_Keys.Contains(_) == false);
                 ups = m_Keys.Where(_ => keys.Contains(_) == false);
             }
+            else if (m_Keys.Count > 0)
+            {
+                downs = null;
+                ups = m_Keys;
+            }
+            else if(keys != null && keys.Count > 0)
+            {
+                downs = keys;
+                ups = null;
+            }
             else
             {
-                downs = null; 
-                ups = m_Keys;
+                return;
             }
 
             if(downs != null)

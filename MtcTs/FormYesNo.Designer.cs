@@ -36,17 +36,19 @@
             // labelMsg
             // 
             labelMsg.AutoSize = true;
-            labelMsg.Location = new Point(12, 9);
+            labelMsg.Location = new Point(16, 11);
+            labelMsg.Margin = new Padding(4, 0, 4, 0);
             labelMsg.Name = "labelMsg";
-            labelMsg.Size = new Size(288, 20);
+            labelMsg.Size = new Size(367, 25);
             labelMsg.TabIndex = 0;
             labelMsg.Text = "有効 → 無効 に切り替えます。よろしいですか？";
             // 
             // buttonYes
             // 
-            buttonYes.Location = new Point(12, 44);
+            buttonYes.Location = new Point(16, 55);
+            buttonYes.Margin = new Padding(4, 4, 4, 4);
             buttonYes.Name = "buttonYes";
-            buttonYes.Size = new Size(100, 34);
+            buttonYes.Size = new Size(138, 42);
             buttonYes.TabIndex = 1;
             buttonYes.TabStop = false;
             buttonYes.Text = "はい　Yes";
@@ -55,9 +57,10 @@
             // 
             // buttonNo
             // 
-            buttonNo.Location = new Point(129, 44);
+            buttonNo.Location = new Point(177, 55);
+            buttonNo.Margin = new Padding(4, 4, 4, 4);
             buttonNo.Name = "buttonNo";
-            buttonNo.Size = new Size(100, 34);
+            buttonNo.Size = new Size(138, 42);
             buttonNo.TabIndex = 1;
             buttonNo.TabStop = false;
             buttonNo.Text = "いいえ No";
@@ -66,16 +69,16 @@
             // 
             // FormYesNo
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(11F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(316, 95);
+            ClientSize = new Size(434, 119);
             ControlBox = false;
             Controls.Add(buttonNo);
             Controls.Add(buttonYes);
             Controls.Add(labelMsg);
-            Font = new Font("Yu Gothic UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormYesNo";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FormYesNo";

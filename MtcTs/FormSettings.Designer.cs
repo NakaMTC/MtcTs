@@ -101,8 +101,8 @@
             // 
             // buttonOK
             // 
-            buttonOK.Location = new Point(540, 553);
-            buttonOK.Margin = new Padding(4, 2, 4, 2);
+            buttonOK.Location = new Point(522, 496);
+            buttonOK.Margin = new Padding(4, 3, 4, 3);
             buttonOK.Name = "buttonOK";
             buttonOK.Size = new Size(99, 41);
             buttonOK.TabIndex = 2;
@@ -112,8 +112,8 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(647, 553);
-            buttonCancel.Margin = new Padding(4, 2, 4, 2);
+            buttonCancel.Location = new Point(630, 496);
+            buttonCancel.Margin = new Padding(4, 3, 4, 3);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(99, 41);
             buttonCancel.TabIndex = 3;
@@ -144,10 +144,10 @@
             panel1.Controls.Add(B);
             panel1.Controls.Add(A強);
             panel1.Controls.Add(A);
-            panel1.Location = new Point(13, 12);
-            panel1.Margin = new Padding(4, 2, 4, 2);
+            panel1.Location = new Point(2, 3);
+            panel1.Margin = new Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(727, 167);
+            panel1.Size = new Size(727, 159);
             panel1.TabIndex = 0;
             // 
             // label10
@@ -155,7 +155,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.White;
             label10.BorderStyle = BorderStyle.FixedSingle;
-            label10.Location = new Point(440, 133);
+            label10.Location = new Point(440, 132);
             label10.Name = "label10";
             label10.Size = new Size(33, 17);
             label10.TabIndex = 18;
@@ -166,7 +166,7 @@
             ATS.DropDownStyle = ComboBoxStyle.DropDownList;
             ATS.FormattingEnabled = true;
             ATS.Location = new Point(478, 130);
-            ATS.Margin = new Padding(4, 2, 4, 2);
+            ATS.Margin = new Padding(4, 3, 4, 3);
             ATS.Name = "ATS";
             ATS.Size = new Size(137, 23);
             ATS.TabIndex = 19;
@@ -175,7 +175,7 @@
             // 
             label9.AutoSize = true;
             label9.BorderStyle = BorderStyle.FixedSingle;
-            label9.Location = new Point(118, 133);
+            label9.Location = new Point(118, 132);
             label9.Name = "label9";
             label9.Size = new Size(24, 17);
             label9.TabIndex = 17;
@@ -271,7 +271,7 @@
             下.DropDownStyle = ComboBoxStyle.DropDownList;
             下.FormattingEnabled = true;
             下.Location = new Point(149, 130);
-            下.Margin = new Padding(4, 2, 4, 2);
+            下.Margin = new Padding(4, 3, 4, 3);
             下.Name = "下";
             下.Size = new Size(137, 23);
             下.TabIndex = 16;
@@ -280,8 +280,8 @@
             // 
             右.DropDownStyle = ComboBoxStyle.DropDownList;
             右.FormattingEnabled = true;
-            右.Location = new Point(228, 103);
-            右.Margin = new Padding(4, 2, 4, 2);
+            右.Location = new Point(228, 102);
+            右.Margin = new Padding(4, 3, 4, 3);
             右.Name = "右";
             右.Size = new Size(137, 23);
             右.TabIndex = 14;
@@ -290,8 +290,8 @@
             // 
             左.DropDownStyle = ComboBoxStyle.DropDownList;
             左.FormattingEnabled = true;
-            左.Location = new Point(83, 103);
-            左.Margin = new Padding(4, 2, 4, 2);
+            左.Location = new Point(83, 102);
+            左.Margin = new Padding(4, 3, 4, 3);
             左.Name = "左";
             左.Size = new Size(137, 23);
             左.TabIndex = 13;
@@ -301,7 +301,7 @@
             上.DropDownStyle = ComboBoxStyle.DropDownList;
             上.FormattingEnabled = true;
             上.Location = new Point(149, 76);
-            上.Margin = new Padding(4, 2, 4, 2);
+            上.Margin = new Padding(4, 3, 4, 3);
             上.Name = "上";
             上.Size = new Size(137, 23);
             上.TabIndex = 11;
@@ -311,7 +311,7 @@
             D.DropDownStyle = ComboBoxStyle.DropDownList;
             D.FormattingEnabled = true;
             D.Location = new Point(574, 8);
-            D.Margin = new Padding(4, 2, 4, 2);
+            D.Margin = new Padding(4, 3, 4, 3);
             D.Name = "D";
             D.Size = new Size(137, 23);
             D.TabIndex = 7;
@@ -321,7 +321,7 @@
             C.DropDownStyle = ComboBoxStyle.DropDownList;
             C.FormattingEnabled = true;
             C.Location = new Point(394, 8);
-            C.Margin = new Padding(4, 2, 4, 2);
+            C.Margin = new Padding(4, 3, 4, 3);
             C.Name = "C";
             C.Size = new Size(137, 23);
             C.TabIndex = 5;
@@ -331,7 +331,7 @@
             B.DropDownStyle = ComboBoxStyle.DropDownList;
             B.FormattingEnabled = true;
             B.Location = new Point(222, 8);
-            B.Margin = new Padding(4, 2, 4, 2);
+            B.Margin = new Padding(4, 3, 4, 3);
             B.Name = "B";
             B.Size = new Size(137, 23);
             B.TabIndex = 3;
@@ -341,7 +341,7 @@
             A強.DropDownStyle = ComboBoxStyle.DropDownList;
             A強.FormattingEnabled = true;
             A強.Location = new Point(46, 38);
-            A強.Margin = new Padding(4, 2, 4, 2);
+            A強.Margin = new Padding(4, 3, 4, 3);
             A強.Name = "A強";
             A強.Size = new Size(137, 23);
             A強.TabIndex = 9;
@@ -351,7 +351,7 @@
             A.DropDownStyle = ComboBoxStyle.DropDownList;
             A.FormattingEnabled = true;
             A.Location = new Point(46, 8);
-            A.Margin = new Padding(4, 2, 4, 2);
+            A.Margin = new Padding(4, 3, 4, 3);
             A.Name = "A";
             A.Size = new Size(137, 23);
             A.TabIndex = 1;
@@ -378,10 +378,10 @@
             panel2.Controls.Add(selC);
             panel2.Controls.Add(selB);
             panel2.Controls.Add(selA);
-            panel2.Location = new Point(13, 194);
-            panel2.Margin = new Padding(4, 2, 4, 2);
+            panel2.Location = new Point(2, 162);
+            panel2.Margin = new Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(727, 167);
+            panel2.Size = new Size(727, 159);
             panel2.TabIndex = 1;
             // 
             // label18
@@ -398,7 +398,7 @@
             label11.AutoSize = true;
             label11.BackColor = Color.White;
             label11.BorderStyle = BorderStyle.FixedSingle;
-            label11.Location = new Point(440, 133);
+            label11.Location = new Point(440, 132);
             label11.Name = "label11";
             label11.Size = new Size(33, 17);
             label11.TabIndex = 18;
@@ -409,7 +409,7 @@
             selATS.DropDownStyle = ComboBoxStyle.DropDownList;
             selATS.FormattingEnabled = true;
             selATS.Location = new Point(478, 130);
-            selATS.Margin = new Padding(4, 2, 4, 2);
+            selATS.Margin = new Padding(4, 3, 4, 3);
             selATS.Name = "selATS";
             selATS.Size = new Size(137, 23);
             selATS.TabIndex = 19;
@@ -418,7 +418,7 @@
             // 
             label12.AutoSize = true;
             label12.BorderStyle = BorderStyle.FixedSingle;
-            label12.Location = new Point(118, 133);
+            label12.Location = new Point(118, 132);
             label12.Name = "label12";
             label12.Size = new Size(24, 17);
             label12.TabIndex = 16;
@@ -503,7 +503,7 @@
             sel下.DropDownStyle = ComboBoxStyle.DropDownList;
             sel下.FormattingEnabled = true;
             sel下.Location = new Point(149, 130);
-            sel下.Margin = new Padding(4, 2, 4, 2);
+            sel下.Margin = new Padding(4, 3, 4, 3);
             sel下.Name = "sel下";
             sel下.Size = new Size(137, 23);
             sel下.TabIndex = 17;
@@ -512,8 +512,8 @@
             // 
             sel右.DropDownStyle = ComboBoxStyle.DropDownList;
             sel右.FormattingEnabled = true;
-            sel右.Location = new Point(228, 103);
-            sel右.Margin = new Padding(4, 2, 4, 2);
+            sel右.Location = new Point(228, 102);
+            sel右.Margin = new Padding(4, 3, 4, 3);
             sel右.Name = "sel右";
             sel右.Size = new Size(137, 23);
             sel右.TabIndex = 14;
@@ -522,8 +522,8 @@
             // 
             sel左.DropDownStyle = ComboBoxStyle.DropDownList;
             sel左.FormattingEnabled = true;
-            sel左.Location = new Point(83, 103);
-            sel左.Margin = new Padding(4, 2, 4, 2);
+            sel左.Location = new Point(83, 102);
+            sel左.Margin = new Padding(4, 3, 4, 3);
             sel左.Name = "sel左";
             sel左.Size = new Size(137, 23);
             sel左.TabIndex = 13;
@@ -533,7 +533,7 @@
             sel上.DropDownStyle = ComboBoxStyle.DropDownList;
             sel上.FormattingEnabled = true;
             sel上.Location = new Point(149, 76);
-            sel上.Margin = new Padding(4, 2, 4, 2);
+            sel上.Margin = new Padding(4, 3, 4, 3);
             sel上.Name = "sel上";
             sel上.Size = new Size(137, 23);
             sel上.TabIndex = 11;
@@ -543,7 +543,7 @@
             selD.DropDownStyle = ComboBoxStyle.DropDownList;
             selD.FormattingEnabled = true;
             selD.Location = new Point(574, 30);
-            selD.Margin = new Padding(4, 2, 4, 2);
+            selD.Margin = new Padding(4, 3, 4, 3);
             selD.Name = "selD";
             selD.Size = new Size(137, 23);
             selD.TabIndex = 7;
@@ -553,7 +553,7 @@
             selC.DropDownStyle = ComboBoxStyle.DropDownList;
             selC.FormattingEnabled = true;
             selC.Location = new Point(394, 30);
-            selC.Margin = new Padding(4, 2, 4, 2);
+            selC.Margin = new Padding(4, 3, 4, 3);
             selC.Name = "selC";
             selC.Size = new Size(137, 23);
             selC.TabIndex = 5;
@@ -563,7 +563,7 @@
             selB.DropDownStyle = ComboBoxStyle.DropDownList;
             selB.FormattingEnabled = true;
             selB.Location = new Point(222, 30);
-            selB.Margin = new Padding(4, 2, 4, 2);
+            selB.Margin = new Padding(4, 3, 4, 3);
             selB.Name = "selB";
             selB.Size = new Size(137, 23);
             selB.TabIndex = 3;
@@ -573,7 +573,7 @@
             selA.DropDownStyle = ComboBoxStyle.DropDownList;
             selA.FormattingEnabled = true;
             selA.Location = new Point(46, 30);
-            selA.Margin = new Padding(4, 2, 4, 2);
+            selA.Margin = new Padding(4, 3, 4, 3);
             selA.Name = "selA";
             selA.Size = new Size(137, 23);
             selA.TabIndex = 1;
@@ -600,8 +600,8 @@
             panel3.Controls.Add(startC);
             panel3.Controls.Add(startB);
             panel3.Controls.Add(startA);
-            panel3.Location = new Point(13, 374);
-            panel3.Margin = new Padding(4, 2, 4, 2);
+            panel3.Location = new Point(2, 322);
+            panel3.Margin = new Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
             panel3.Size = new Size(727, 167);
             panel3.TabIndex = 1;
@@ -620,7 +620,7 @@
             label22.AutoSize = true;
             label22.BackColor = Color.White;
             label22.BorderStyle = BorderStyle.FixedSingle;
-            label22.Location = new Point(440, 133);
+            label22.Location = new Point(440, 132);
             label22.Name = "label22";
             label22.Size = new Size(33, 17);
             label22.TabIndex = 18;
@@ -631,7 +631,7 @@
             startATS.DropDownStyle = ComboBoxStyle.DropDownList;
             startATS.FormattingEnabled = true;
             startATS.Location = new Point(478, 130);
-            startATS.Margin = new Padding(4, 2, 4, 2);
+            startATS.Margin = new Padding(4, 3, 4, 3);
             startATS.Name = "startATS";
             startATS.Size = new Size(137, 23);
             startATS.TabIndex = 19;
@@ -640,7 +640,7 @@
             // 
             label23.AutoSize = true;
             label23.BorderStyle = BorderStyle.FixedSingle;
-            label23.Location = new Point(118, 133);
+            label23.Location = new Point(118, 132);
             label23.Name = "label23";
             label23.Size = new Size(24, 17);
             label23.TabIndex = 16;
@@ -725,7 +725,7 @@
             start下.DropDownStyle = ComboBoxStyle.DropDownList;
             start下.FormattingEnabled = true;
             start下.Location = new Point(149, 130);
-            start下.Margin = new Padding(4, 2, 4, 2);
+            start下.Margin = new Padding(4, 3, 4, 3);
             start下.Name = "start下";
             start下.Size = new Size(137, 23);
             start下.TabIndex = 17;
@@ -734,8 +734,8 @@
             // 
             start右.DropDownStyle = ComboBoxStyle.DropDownList;
             start右.FormattingEnabled = true;
-            start右.Location = new Point(228, 103);
-            start右.Margin = new Padding(4, 2, 4, 2);
+            start右.Location = new Point(228, 102);
+            start右.Margin = new Padding(4, 3, 4, 3);
             start右.Name = "start右";
             start右.Size = new Size(137, 23);
             start右.TabIndex = 14;
@@ -744,8 +744,8 @@
             // 
             start左.DropDownStyle = ComboBoxStyle.DropDownList;
             start左.FormattingEnabled = true;
-            start左.Location = new Point(83, 103);
-            start左.Margin = new Padding(4, 2, 4, 2);
+            start左.Location = new Point(83, 102);
+            start左.Margin = new Padding(4, 3, 4, 3);
             start左.Name = "start左";
             start左.Size = new Size(137, 23);
             start左.TabIndex = 13;
@@ -755,7 +755,7 @@
             start上.DropDownStyle = ComboBoxStyle.DropDownList;
             start上.FormattingEnabled = true;
             start上.Location = new Point(149, 76);
-            start上.Margin = new Padding(4, 2, 4, 2);
+            start上.Margin = new Padding(4, 3, 4, 3);
             start上.Name = "start上";
             start上.Size = new Size(137, 23);
             start上.TabIndex = 11;
@@ -765,7 +765,7 @@
             startD.DropDownStyle = ComboBoxStyle.DropDownList;
             startD.FormattingEnabled = true;
             startD.Location = new Point(574, 30);
-            startD.Margin = new Padding(4, 2, 4, 2);
+            startD.Margin = new Padding(4, 3, 4, 3);
             startD.Name = "startD";
             startD.Size = new Size(137, 23);
             startD.TabIndex = 7;
@@ -775,7 +775,7 @@
             startC.DropDownStyle = ComboBoxStyle.DropDownList;
             startC.FormattingEnabled = true;
             startC.Location = new Point(394, 30);
-            startC.Margin = new Padding(4, 2, 4, 2);
+            startC.Margin = new Padding(4, 3, 4, 3);
             startC.Name = "startC";
             startC.Size = new Size(137, 23);
             startC.TabIndex = 5;
@@ -785,7 +785,7 @@
             startB.DropDownStyle = ComboBoxStyle.DropDownList;
             startB.FormattingEnabled = true;
             startB.Location = new Point(222, 30);
-            startB.Margin = new Padding(4, 2, 4, 2);
+            startB.Margin = new Padding(4, 3, 4, 3);
             startB.Name = "startB";
             startB.Size = new Size(137, 23);
             startB.TabIndex = 3;
@@ -795,7 +795,7 @@
             startA.DropDownStyle = ComboBoxStyle.DropDownList;
             startA.FormattingEnabled = true;
             startA.Location = new Point(46, 30);
-            startA.Margin = new Padding(4, 2, 4, 2);
+            startA.Margin = new Padding(4, 3, 4, 3);
             startA.Name = "startA";
             startA.Size = new Size(137, 23);
             startA.TabIndex = 1;
@@ -803,7 +803,7 @@
             // label31
             // 
             label31.AutoSize = true;
-            label31.Location = new Point(16, 556);
+            label31.Location = new Point(10, 496);
             label31.Name = "label31";
             label31.Size = new Size(126, 15);
             label31.TabIndex = 20;
@@ -813,16 +813,16 @@
             // 
             SelStart.DropDownStyle = ComboBoxStyle.DropDownList;
             SelStart.FormattingEnabled = true;
-            SelStart.Location = new Point(149, 553);
-            SelStart.Margin = new Padding(4, 2, 4, 2);
+            SelStart.Location = new Point(143, 496);
+            SelStart.Margin = new Padding(4, 3, 4, 3);
             SelStart.Name = "SelStart";
             SelStart.Size = new Size(137, 23);
             SelStart.TabIndex = 21;
             // 
             // buttonInit
             // 
-            buttonInit.Location = new Point(322, 553);
-            buttonInit.Margin = new Padding(4, 2, 4, 2);
+            buttonInit.Location = new Point(296, 496);
+            buttonInit.Margin = new Padding(4, 3, 4, 3);
             buttonInit.Name = "buttonInit";
             buttonInit.Size = new Size(99, 41);
             buttonInit.TabIndex = 22;
@@ -834,7 +834,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(775, 605);
+            ClientSize = new Size(732, 544);
             ControlBox = false;
             Controls.Add(buttonInit);
             Controls.Add(SelStart);
@@ -846,7 +846,7 @@
             Controls.Add(buttonOK);
             Font = new Font("BIZ UDゴシック", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 2, 4, 2);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "FormSettings";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FormSettings";
