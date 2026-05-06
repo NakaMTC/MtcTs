@@ -34,14 +34,13 @@
             label1 = new Label();
             buttonSettings = new Button();
             textBox1 = new TextBox();
-            textBox2 = new TextBox();
             buttonClose = new Button();
             SuspendLayout();
             // 
             // chkEnable
             // 
             chkEnable.AutoSize = true;
-            chkEnable.Location = new Point(95, 12);
+            chkEnable.Location = new Point(95, 17);
             chkEnable.Name = "chkEnable";
             chkEnable.Size = new Size(56, 19);
             chkEnable.TabIndex = 0;
@@ -85,32 +84,22 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(95, 34);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Location = new Point(95, 55);
             textBox1.Margin = new Padding(2, 3, 2, 3);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(174, 159);
+            textBox1.Size = new Size(233, 138);
             textBox1.TabIndex = 5;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(297, 64);
-            textBox2.Margin = new Padding(2, 3, 2, 3);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.ScrollBars = ScrollBars.Vertical;
-            textBox2.Size = new Size(229, 129);
-            textBox2.TabIndex = 5;
             // 
             // buttonClose
             // 
             buttonClose.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonClose.Location = new Point(461, 12);
+            buttonClose.Location = new Point(263, 12);
             buttonClose.Margin = new Padding(2, 3, 2, 3);
             buttonClose.Name = "buttonClose";
-            buttonClose.Size = new Size(65, 31);
+            buttonClose.Size = new Size(65, 24);
             buttonClose.TabIndex = 4;
             buttonClose.Text = "終了";
             buttonClose.UseVisualStyleBackColor = true;
@@ -120,9 +109,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(541, 259);
+            ClientSize = new Size(339, 234);
             ControlBox = false;
-            Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(buttonClose);
             Controls.Add(buttonSettings);
@@ -147,7 +135,6 @@
         private Label label1;
         private Button buttonSettings;
         private TextBox textBox1;
-        private TextBox textBox2;
         private Button buttonClose;
     }
 }

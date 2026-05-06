@@ -147,9 +147,6 @@ namespace MtcTs
         X_警報持続 = 'X',
         Y_復帰常用 = 'Y',
 
-        Win = 0x5B,
-        Alt = 0xA4,
-
         非常 = -1,
         WinG_ゲームバー = -2,
         WinAltR_録画 = -3,

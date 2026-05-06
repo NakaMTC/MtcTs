@@ -37,8 +37,6 @@ namespace MtcTs
         /// <summary>　MTCを有効にするかどうか？ </summary>
         private bool m_Enable = false;
 
-        /// <summary>　接続OKかどうか？ </summary>
-        private bool m_ConnectOK = false;
 
         private string m_LavelText = "";
 
@@ -97,6 +95,20 @@ namespace MtcTs
                     bool res = Usb.Read();
                     if (res) res = MTC.Read();
 
+                    if(res)
+                    {
+                        if(Usb.m_Uint32 != 0x00 &&  m_Enable)
+                        {
+                            MtcKeyMouse.OnKeyDownUp();
+                            MtcKeyMouse.OnKeyFR();
+                        }
+                        else
+                        {
+                            MtcKeyMouse.OnKeyClear();
+                        }
+                    }
+                    
+
                     string str = Usb.ToText() + " " + MTC.ToText();
 
                     if (m_Enable == false && str != m_LavelText)
@@ -104,7 +116,6 @@ namespace MtcTs
                         Invoke(() => label1.Text = str);
                         m_LavelText = str;
                     }
-
 
                     if (Usb.m_Uint32 == 0x00) Thread.Sleep(5000);
                 }
@@ -160,18 +171,18 @@ namespace MtcTs
             if (MTC.selStartBoth) nowKeys.Add(Settings.instance.SelStart);
 
 
-            if (nowKeys.Contains((int)eKeyTypes.WinAltR_録画))
-            {
-                nowKeys.Add((int)eKeyTypes.Win);
-                nowKeys.Add((int)eKeyTypes.Alt);
-                nowKeys.Add('R');
-            }
+            //if (nowKeys.Contains((int)eKeyTypes.WinAltR_録画))
+            //{
+            //    nowKeys.Add((int)eKeyTypes.Win);
+            //    nowKeys.Add((int)eKeyTypes.Alt);
+            //    nowKeys.Add('R');
+            //}
 
-            if (nowKeys.Contains((int)eKeyTypes.WinG_ゲームバー))
-            {
-                nowKeys.Add((int)eKeyTypes.Win);
-                nowKeys.Add('G');
-            }
+            //if (nowKeys.Contains((int)eKeyTypes.WinG_ゲームバー))
+            //{
+            //    nowKeys.Add((int)eKeyTypes.Win);
+            //    nowKeys.Add('G');
+            //}
 
             if (nowKeys.Contains((int)eKeyTypes.EB_Bブザー))
             {
@@ -241,17 +252,6 @@ namespace MtcTs
                 if (key >= (int)'A' && key <= (int)'Z') tmp += $" ({(char)key})\r\n";
                 else tmp += $" ({key})\r\n";
             }
-
-
-            Invoke(() =>
-            {
-                textBox2.Text += tmp;
-
-                textBox2.SelectionStart = textBox2.Text.Length;
-
-                textBox2.ScrollToCaret();
-            });
-
         }
 
 
@@ -263,10 +263,9 @@ namespace MtcTs
                 return;
             }
 
-            if (m_Enable == false || m_ConnectOK == false) return;
-
-
-            MessageBox.Show("aa");
+            if (m_Enable == false || Usb.m_ConnectOK == false) return;
+                        
+            MessageBox.Show(this, "aa");
         }
 
 

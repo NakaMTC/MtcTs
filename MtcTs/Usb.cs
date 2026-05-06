@@ -42,6 +42,10 @@ namespace MtcTs
         /// <summary> 現在のUSBの読み込み値(32ビット)</summary>
         internal static uint m_Uint32 = 0;
 
+        /// <summary> 接続OKか？ </summary>
+        internal static bool m_ConnectOK = false;
+
+
         /// <summary> 現在のエラー </summary>
         internal static Exception? m_Error = null;
 
@@ -102,13 +106,22 @@ namespace MtcTs
                 int readLen = 0;
                 ErrorCode code = m_Reader.Read(buff, 2000, out readLen);
 
-                if (code == ErrorCode.IoTimedOut) return false;   // タイムアウトの場合は無視する
+
+                if (code == ErrorCode.IoTimedOut)
+                {
+                    // タイムアウトの場合
+                    m_ConnectOK = false;
+                    return false;   
+                }
+
+                // 接続エラーの場合
                 if (readLen <= 0 || code != ErrorCode.None) throw new Exception($"接続エラー{code}");
 
                 uint tmp = (readLen > 0) ? ((uint)buff[1] << 00 | (uint)buff[2] << 08 | (uint)buff[3] << 16 | (uint)buff[4] << 24) : 0;
-
-
                 m_Error = null;
+                m_ConnectOK = (tmp != 0x00);
+
+
 
                 if (tmp == 0 || tmp == m_Uint32) return false;
 
@@ -117,6 +130,10 @@ namespace MtcTs
             }
             catch (Exception ex)
             {
+                m_ConnectOK = false;
+
+                MtcKeyMouse.OnKeyClear();
+
                 try { m_Device?.Close(); } catch { }
                 try { m_Reader?.Dispose(); } catch { }
                 m_Device = null;
