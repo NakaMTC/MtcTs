@@ -7,14 +7,17 @@ namespace MtcTs
     {
         [DllImport("USER32.dll", CallingConvention = CallingConvention.StdCall)]
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
-
         private const uint KEYEVENTF_KEYDOWN = 0x0000;
         private const uint KEYEVENTF_KEYUPDOWN = 0x0001;
         private const uint KEYEVENTF_KEYUP = 0x0002;
         private const byte VK_UP = 0x26;
         private const byte VK_DOWN = 0x28;
 
-
+        [DllImport("USER32.dll", CallingConvention = CallingConvention.StdCall)]
+        static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        private const int MOUSEEVENTF_WHEEL = 0x0800;
 
         /// <summary> 左Windowsキー、左Altキー </summary>
         private const int VK_Win = 0x5B, VK_Alt = 0xA4;
@@ -171,15 +174,68 @@ namespace MtcTs
                 Thread.Sleep(10);
                 keybd_event(FR_DOWN, 0, KEYEVENTF_KEYUPDOWN, 0);
             }
-            else if (m_Fr > 0)
+            else if (MTC.fr == 0 && m_Fr > 0)
             {   // 前進→中立に切り替えた場合 ↓
                 keybd_event(FR_DOWN, 0, KEYEVENTF_KEYUPDOWN, 0);
             }
-            else if (m_Fr < 0)
+            else if (MTC.fr == 0 && m_Fr < 0)
             {   // 後退→中立に切り替えた場合 ↑
                 keybd_event(FR_UP, 0, KEYEVENTF_KEYUPDOWN, 0);
             }
             m_Fr = MTC.fr;
+        }
+
+
+        private static int m_Val = 0;
+
+        internal static void OnValChange()
+        {
+            // 変更後の値
+            int mtcVal = MTC.val;   
+            if (Usb.m_Kiha)
+            {
+                if (MTC.val == 0 || MTC.val == -1) mtcVal = 0;      // B0 B1 → B0 (緩め)
+                if (MTC.val == -2 || MTC.val == -3) mtcVal = -1;    // B2 B3 → B1 (重なり)
+                if (MTC.val == -4 || MTC.val == -5) mtcVal = -2;    // B4 B5 → B2 (制動)
+                if (MTC.val <= -6) mtcVal = -3;                     // B9（非常） → B3 (非常)
+            }
+
+            if(MTC.val == Usb.m_Min)
+            {
+                if (m_非常) mtcVal--;           // 非常ブレーキボタン のとき、現在の段数を -8 → -9 に変更
+                if (m_Val <= mtcVal) return;    // (変更前:-9 <= 変更後:-8～-9)  or (変更前:-8 <= 変更後:-8) は除外
+            }
+
+            // 非常ブレーキの段数
+            int val非常;
+            if (Usb.m_Kiha) val非常 = -3;
+            else if (Usb.m_Shitetsu) val非常 = -8;
+            else val非常 = -9;
+
+            // 段数の変化量
+            int move;
+            if (mtcVal == val非常) move = -30;
+            else if (mtcVal == Usb.m_Max) move = 30;
+            else move = mtcVal - m_Val;
+
+
+            if (MTC.val == 0)
+            {
+                mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0);
+                Thread.Sleep(10);
+                mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, 0);
+                Thread.Sleep(10);
+                mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0);
+                Thread.Sleep(10);
+                mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, 0);
+            }
+            else if (move != 0)
+            {
+                mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -move * 120, 0);
+            }
+
+            m_Val = mtcVal;
+
         }
     }
 }
