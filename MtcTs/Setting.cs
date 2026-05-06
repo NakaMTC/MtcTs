@@ -69,11 +69,11 @@ namespace MtcTs
 
 
 
+        private static readonly JsonSerializerOptions serializerOptions = new() { IncludeFields = true, WriteIndented = true, };
 
         static Settings()
         {
             Settings? settings = null;
-
 
             try
             {
@@ -83,8 +83,7 @@ namespace MtcTs
 
                 if (json != null)
                 {
-                    var options = new JsonSerializerOptions { IncludeFields = true, };
-                    settings = JsonSerializer.Deserialize<Settings>(json, options);
+                    settings = JsonSerializer.Deserialize<Settings>(json, serializerOptions);
                 }
             }
             catch
@@ -106,13 +105,7 @@ namespace MtcTs
         {
             try
             {
-                var options = new JsonSerializerOptions
-                {
-                    IncludeFields = true,
-                    WriteIndented = true,
-                };
-
-                string json = JsonSerializer.Serialize(settings, options);
+                string json = JsonSerializer.Serialize(settings, serializerOptions);
                 File.WriteAllText(JsonFilePath(), json, Encoding.UTF8);
             }
             catch (Exception) { }

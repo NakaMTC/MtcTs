@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Reflection;
 
 namespace MtcTs
 {
@@ -38,7 +39,7 @@ namespace MtcTs
         private bool m_Enable = false;
 
 
-        private string m_LavelText = "";
+        private string m_LabelText = "";
 
 
 
@@ -67,10 +68,8 @@ namespace MtcTs
             }
             else
             {
-                using (var form = new FormSettings() { Icon = this.Icon })
-                {
-                    form.ShowDialog(this);
-                }
+                using var form = new FormSettings() { Icon = this.Icon };
+                form.ShowDialog(this);
             }
         }
 
@@ -82,8 +81,11 @@ namespace MtcTs
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            Text = "MTC";
+        {            
+            string filePath = Assembly.GetExecutingAssembly().Location;                 // 自分自身の実行ファイルのパスを取得
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(filePath);     // ファイルのバージョン情報を取得
+
+            Text = $"MtcTs - ver.{versionInfo.FileVersion}";
             label1.Text = "";
 
             Task.Run(() =>
@@ -110,10 +112,10 @@ namespace MtcTs
 
                     string str = Usb.ToText() + " " + MTC.ToText();
 
-                    if (m_Enable == false && str != m_LavelText)
+                    if (m_Enable == false && str != m_LabelText)
                     {
                         Invoke(() => label1.Text = str);
-                        m_LavelText = str;
+                        m_LabelText = str;
                     }
 
                     if (Usb.m_Uint32 == 0x00) Thread.Sleep(5000);

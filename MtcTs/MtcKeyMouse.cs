@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace MtcTs
 {
@@ -81,25 +82,8 @@ namespace MtcTs
 
                 m_非常 = nowKeys.Contains((int)eKeyTypes.非常);
 
-                if (nowKeys.Contains((int)eKeyTypes.WinG_ゲームバー))
-                {
-                    nowKeys.Add(VK_Win);
-                    nowKeys.Add('G');
-                }
 
-                if (nowKeys.Contains((int)eKeyTypes.WinAltR_録画))
-                {
-                    nowKeys.Add(VK_Win);
-                    nowKeys.Add(VK_Alt);
-                    nowKeys.Add('R');
-                }
-
-                if (nowKeys.Contains((int)eKeyTypes.EB_Bブザー))
-                {
-                    nowKeys.Add(Usb.m_Shitetsu ? (int)eKeyTypes.B_ブザー : (int)eKeyTypes.E_EBリセット);
-                }
-
-                nowKeys = nowKeys.Where(x => x > 0).Distinct().ToList();
+                nowKeys = nowKeys.Where(x => x != 0).Distinct().ToList();
 
                 if (nowKeys.Count == 0 && m_Keys.Count == 0) return;
 
@@ -138,7 +122,7 @@ namespace MtcTs
             {
                 foreach (int key in downs)
                 {
-                    keybd_event((byte)key, 0, KEYEVENTF_KEYDOWN, 0);
+                    keyDown(key);
                     m_Keys.Add(key);
                 }
             }
@@ -147,11 +131,55 @@ namespace MtcTs
             {
                 foreach (int key in ups)
                 {
-                    keybd_event((byte)key, 0, KEYEVENTF_KEYUP, 0);
+                    keyUp(key);
                     m_Keys.Remove(key);
                 }
             }
         }
+
+
+        static void keyDown(int key)
+        {
+            if (key == (int)eKeyTypes.EB_Bブザー) key = (Usb.m_Shitetsu ? (int)eKeyTypes.B_ブザー : (int)eKeyTypes.E_EBリセット);
+
+            if (key > 0)
+            {
+                keybd_event((byte)key, 0, KEYEVENTF_KEYDOWN, 0);
+            }
+            else if (key == (int)eKeyTypes.WinG_ゲームバー)
+            {
+                keybd_event((byte)VK_Win, 0, KEYEVENTF_KEYDOWN, 0);
+                keybd_event((byte)'G', 0, KEYEVENTF_KEYDOWN, 0);
+            }
+            else if (key == (int)eKeyTypes.WinAltR_録画)
+            {
+                keybd_event((byte)VK_Win, 0, KEYEVENTF_KEYDOWN, 0);
+                keybd_event((byte)VK_Alt, 0, KEYEVENTF_KEYDOWN, 0);
+                keybd_event((byte)'R', 0, KEYEVENTF_KEYDOWN, 0);
+            }
+        }
+
+        static void keyUp(int key)
+        {
+            if (key == (int)eKeyTypes.EB_Bブザー) key = (Usb.m_Shitetsu ? (int)eKeyTypes.B_ブザー : (int)eKeyTypes.E_EBリセット);
+
+            if (key > 0)
+            {
+                keybd_event((byte)key, 0, KEYEVENTF_KEYUP, 0);
+            }
+            else if (key == (int)eKeyTypes.WinG_ゲームバー)
+            {
+                keybd_event((byte)'G', 0, KEYEVENTF_KEYUP, 0);
+                keybd_event((byte)VK_Win, 0, KEYEVENTF_KEYUP, 0);
+            }
+            else if (key == (int)eKeyTypes.WinAltR_録画)
+            {
+                keybd_event((byte)'R', 0, KEYEVENTF_KEYUP, 0);
+                keybd_event((byte)VK_Alt, 0, KEYEVENTF_KEYUP, 0);
+                keybd_event((byte)VK_Win, 0, KEYEVENTF_KEYUP, 0);
+            }
+        }
+
 
         private static int m_Fr = 0;
 

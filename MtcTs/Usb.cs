@@ -103,8 +103,7 @@ namespace MtcTs
 
                 // 8バイトバッファへの読み込み
                 byte[] buff = new byte[8];  // 8バイトバッファ
-                int readLen = 0;
-                ErrorCode code = m_Reader.Read(buff, 2000, out readLen);
+                ErrorCode code = m_Reader.Read(buff, 2000, out int readLen);
 
 
                 if (code == ErrorCode.IoTimedOut)
