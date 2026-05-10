@@ -1,5 +1,8 @@
 ﻿namespace MtcTs
 {
+    /// <summary>
+    /// メッセージボックス （親フォーム中央に表示、YesNo または エラー）
+    /// </summary>
     public partial class FormMsg : Form
     {
         internal FormMsg(Form? parent, string msg, string title, bool bYesNo)
@@ -14,6 +17,8 @@
             buttonYes.Text = (bYesNo) ? "はい (Yes)" : "OK";
             buttonNo.Text = "いいえ (No)";
             buttonNo.Visible = bYesNo;
+
+            labelMsg.ForeColor = (bYesNo ? Color.Black : Color.Red);
         }
 
 

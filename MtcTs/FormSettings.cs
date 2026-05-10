@@ -52,6 +52,7 @@ namespace MtcTs
             }
 
             comboBox.DataSource = m_List.ToArray();
+            //comboBox.DropDownHeight = comboBox.ItemHeight * 10;
 
         }
 

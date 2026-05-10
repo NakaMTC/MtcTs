@@ -46,7 +46,7 @@
             // buttonYes
             // 
             buttonYes.Location = new Point(16, 55);
-            buttonYes.Margin = new Padding(4, 4, 4, 4);
+            buttonYes.Margin = new Padding(4);
             buttonYes.Name = "buttonYes";
             buttonYes.Size = new Size(138, 42);
             buttonYes.TabIndex = 1;
@@ -58,7 +58,7 @@
             // buttonNo
             // 
             buttonNo.Location = new Point(177, 55);
-            buttonNo.Margin = new Padding(4, 4, 4, 4);
+            buttonNo.Margin = new Padding(4);
             buttonNo.Name = "buttonNo";
             buttonNo.Size = new Size(138, 42);
             buttonNo.TabIndex = 1;
@@ -71,7 +71,7 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(434, 119);
+            ClientSize = new Size(411, 119);
             ControlBox = false;
             Controls.Add(buttonNo);
             Controls.Add(buttonYes);
@@ -79,7 +79,7 @@
             Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 5, 4, 5);
-            Name = "FormYesNo";
+            Name = "FormMsg";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FormYesNo";
             Load += FormYesNo_Load;
